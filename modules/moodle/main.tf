@@ -51,7 +51,7 @@ resource "oci_core_instance" "Moodle" {
   fault_domain        = var.use_AD == true ? "FAULT-DOMAIN-1" : "FAULT-DOMAIN-${(count.index  % local.fault_domains_per_ad) +1}"
 
   dynamic "shape_config" {
-    for_each = local.is_flexible_node_shape ? [1] : []
+    for_each = local.is_flexible_node_shape ? [1] : [0]
     content {
       memory_in_gbs = var.flex_shape_memory
       ocpus = var.flex_shape_ocpus
